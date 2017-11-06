@@ -22,7 +22,6 @@ var tw, arr ;
 /* GET twit listing. */
 router.get('/:username', function (req, res, next) {
     var params = {screen_name: req.params.username};
-    console.log(req.params.username);
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) {
             tw = tweets;
@@ -30,7 +29,7 @@ router.get('/:username', function (req, res, next) {
         }
         tw.forEach(function (item) {
             obj = {
-                'date': item.created_id,
+                'date': item.created_at,
                 'message': item.text,
                 'sentiment': sentiment(item.text)
             };
